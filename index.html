@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MAB AI Business Council</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Unbounded:wght@500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="hero">
+    <nav class="top-bar">
+      <div class="logo">MAB AI</div>
+      <button class="library-link" data-target="library">Library</button>
+    </nav>
+    <div class="hero-content">
+      <p class="eyebrow">Multi-Agent Decision Intelligence</p>
+      <h1>MAB AI Business Council</h1>
+      <p class="subtitle">The future of the MAB AI lies in your hands.</p>
+      <div class="hero-actions">
+        <button class="primary" data-target="custom-council">Build a Custom Council</button>
+        <button class="ghost" data-target="template-councils">Explore Templates</button>
+      </div>
+    </div>
+    <div class="hero-options">
+      <article class="option-card" data-target="custom-council">
+        <h3>Custom Council</h3>
+        <p>Create a bespoke delegation and define the exact voices you need.</p>
+        <span class="cta">Choose Roles →</span>
+      </article>
+      <article class="option-card" data-target="template-councils">
+        <h3>Template Councils</h3>
+        <p>Select pre-crafted councils or mix-and-match councils for rapid alignment.</p>
+        <span class="cta">Browse Templates →</span>
+      </article>
+      <article class="option-card" data-target="library">
+        <h3>Library</h3>
+        <p>Revisit decisions, review definitions, and continue open threads.</p>
+        <span class="cta">Open Library →</span>
+      </article>
+    </div>
+  </header>
+
+  <main>
+    <section id="custom-council" class="panel">
+      <div class="panel-header">
+        <h2>Build Your Custom Council</h2>
+        <p>Hand-pick the roles you need for this decision. Every flow begins with the Core Brain/EA and can expand across hierarchies.</p>
+      </div>
+      <div class="panel-grid">
+        <aside class="role-filter">
+          <label class="search">
+            <span class="material-symbol">search</span>
+            <input type="search" id="role-search" placeholder="Search roles, skills, or councils" />
+          </label>
+          <div class="filter-tags" id="active-filters"></div>
+          <div class="role-catalog" id="role-catalog"></div>
+        </aside>
+        <section class="workspace">
+          <form id="custom-form" class="council-form">
+            <h3>Decision Brief</h3>
+            <label class="field">
+              <span>Decision Name</span>
+              <input type="text" id="decision-name" placeholder="e.g. Q3 Product Launch Strategy" required />
+            </label>
+            <label class="field">
+              <span>Context &amp; Objectives</span>
+              <textarea id="decision-context" rows="4" placeholder="Provide background and success metrics"></textarea>
+            </label>
+            <label class="field">
+              <span>Key Question</span>
+              <textarea id="decision-question" rows="3" placeholder="What do you need the council to decide?" required></textarea>
+            </label>
+            <div class="selected-roles">
+              <h4>Selected Roles</h4>
+              <p class="hint">The Core Brain/EA anchors every council and routes the flow.</p>
+              <ul id="selected-role-list"></ul>
+            </div>
+            <button class="primary" type="submit">Run Council Deliberation</button>
+          </form>
+          <div
+            id="deliberation-output"
+            class="deliberation hidden"
+            role="region"
+            aria-live="polite"
+          ></div>
+        </section>
+      </div>
+    </section>
+
+    <section id="template-councils" class="panel">
+      <div class="panel-header">
+        <h2>Template Councils</h2>
+        <p>Quickly assemble trusted constellations. Combine multiple councils for comprehensive coverage.</p>
+      </div>
+      <div class="template-grid">
+        <div class="templates" id="template-list"></div>
+        <aside class="template-summary">
+          <h3>Combined Template</h3>
+          <p>Select any number of template councils. Their members merge with your custom picks.</p>
+          <div id="template-selected"></div>
+          <button class="ghost" id="apply-templates">Apply to Custom Council</button>
+        </aside>
+      </div>
+    </section>
+
+    <section id="library" class="panel">
+      <div class="panel-header">
+        <h2>Library &amp; Continuity</h2>
+        <p>Review prior decisions, reopen conversations, and understand every role&apos;s charter.</p>
+      </div>
+      <div class="library-grid">
+        <div class="history">
+          <h3>Decision History</h3>
+          <ul id="history-list" class="history-list"></ul>
+        </div>
+        <div class="role-encyclopedia">
+          <h3>Role Encyclopedia</h3>
+          <div id="role-encyclopedia"></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="panel future">
+      <div class="panel-header">
+        <h2>Future Iterations Preview</h2>
+        <p>Coming soon: submissions for new roles, analytics insights, and richer council templates.</p>
+      </div>
+      <div class="future-grid">
+        <article>
+          <h3>4. Submissions</h3>
+          <p>Gather new role proposals and feedback via Google Forms integrations.</p>
+        </article>
+        <article>
+          <h3>5. Analytics</h3>
+          <p>Visualize utility, outcomes, and ROI with Google Analytics.</p>
+        </article>
+        <article class="note">
+          <h4>Expandability</h4>
+          <p>Architected for new councils, roles, and custom save states. Reasoning weights adapt as hierarchies evolve.</p>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <p>© <span id="year"></span> MAB AI Business Council. All rights reserved.</p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
