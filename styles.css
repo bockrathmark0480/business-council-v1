@@ -56,19 +56,21 @@ button {
 }
 
 .hero-video {
-  position: absolute;
-  top: 2rem;
-  right: 2rem;
-  width: 400px;
-  max-width: 30vw;
+    position: absolute;
+  top: 50%;
+  right: 5%;
+  transform: translateY(-50%);
+  width: 550px;
+  max-width: 40vw;
   height: auto;
   border-radius: var(--radius-lg);
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
   z-index: 10;
   object-fit: cover;
-  /* Match website gradient background */
+  /* Smooth gradient blending with background */
+  mask-image: radial-gradient(ellipse at center, black 60%, transparent 100%);
+  -webkit-mask-image: radial-gradient(ellipse at center, black 60%, transparent 100%);
   background: radial-gradient(circle at 10% 20%, #0f172a, #020617 60%);
-}
 
 .hero::before {
   content: "";
