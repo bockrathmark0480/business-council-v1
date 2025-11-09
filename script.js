@@ -941,3 +941,19 @@ function updateYear() {
   const yearEl = document.getElementById("year");
   yearEl.textContent = new Date().getFullYear();
 }
+
+// Hero Video - Play once and freeze on final frame
+document.addEventListener('DOMContentLoaded', () => {
+  const heroVideo = document.getElementById('hero-video');
+  
+  if (heroVideo) {
+    // Play video once
+    heroVideo.play();
+    
+    // When video ends, seek to last frame and pause
+    heroVideo.addEventListener('ended', () => {
+      heroVideo.currentTime = heroVideo.duration - 0.1;
+      heroVideo.pause();
+    });
+  }
+});
