@@ -109,40 +109,40 @@ export default async function handler(req, res) {
     }
 
     const totalWeight = roles.reduce((sum, role) => sum + (role.reasoning || 0), 0);
-    const roleOutputs = [];
+    const roleOutputs = await Promise.all(
+      roles.map(async (role) => {
+        const weightPercent = totalWeight ? Math.round(((role.reasoning || 0) / totalWeight) * 100) : 0;
+        const messages = [
+          {
+            role: "system",
+            content:
+              "You are a specialized executive contributing to a multi-role business council. Always respond with valid JSON only.",
+          },
+          {
+            role: "user",
+            content: buildRolePrompt({ role, question, context, weightPercent }),
+          },
+        ];
 
-    for (const role of roles) {
-      const weightPercent = totalWeight ? Math.round(((role.reasoning || 0) / totalWeight) * 100) : 0;
-      const messages = [
-        {
-          role: "system",
-          content:
-            "You are a specialized executive contributing to a multi-role business council. Always respond with valid JSON only.",
-        },
-        {
-          role: "user",
-          content: buildRolePrompt({ role, question, context, weightPercent }),
-        },
-      ];
+        const response = await callOpenAI({ messages, temperature: 0.65, max_tokens: 500 });
+        const stance = response.stance || "undetermined";
+        const summary = response.summary || "No summary provided.";
+        const riskFlags = Array.isArray(response.riskFlags)
+          ? response.riskFlags
+          : response.riskFlags
+          ? [String(response.riskFlags)]
+          : [];
 
-      const response = await callOpenAI({ messages, temperature: 0.65, max_tokens: 500 });
-      const stance = response.stance || "undetermined";
-      const summary = response.summary || "No summary provided.";
-      const riskFlags = Array.isArray(response.riskFlags)
-        ? response.riskFlags
-        : response.riskFlags
-        ? [String(response.riskFlags)]
-        : [];
-
-      roleOutputs.push({
-        roleId: role.id,
-        name: role.name,
-        weight: weightPercent,
-        stance,
-        summary,
-        riskFlags,
-      });
-    }
+        return {
+          roleId: role.id,
+          name: role.name,
+          weight: weightPercent,
+          stance,
+          summary,
+          riskFlags,
+        };
+      })
+    );
 
     const synthesisMessages = [
       {
